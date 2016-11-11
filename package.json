@@ -17,7 +17,7 @@
     "url": "https://github.com/jiheh/RealityFilter/issues"
   },
   "homepage": "https://github.com/jiheh/RealityFilter#readme",
-  "devDependencies": {
+  "dependencies": {
     "express": "^4.14.0"
   }
 }
