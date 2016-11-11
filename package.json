@@ -1,0 +1,23 @@
+{
+  "name": "mixedreality",
+  "version": "1.0.0",
+  "description": "A mixed reality app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiheh/RealityFilter.git"
+  },
+  "author": "Jiheh Ritterling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiheh/RealityFilter/issues"
+  },
+  "homepage": "https://github.com/jiheh/RealityFilter#readme",
+  "devDependencies": {
+    "express": "^4.14.0"
+  }
+}
