@@ -24,9 +24,10 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   element = renderer.domElement;
   container = document.getElementById('webglviewer');
+
   container.appendChild(element);
 
-  image = document.createElement('image')
+
 
   effect = new THREE.StereoEffect(renderer);
 
