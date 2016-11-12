@@ -52,7 +52,7 @@ function init() {
       mandatory: {
         minWidth: 1600,
         minHeight: 900,
-        minFrameRate: 30
+        minFrameRate: 60
       },
       optional: [
         // { minFrameRate: 120 },
