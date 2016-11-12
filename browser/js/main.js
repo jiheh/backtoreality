@@ -22,7 +22,7 @@ function init() {
   camera.position.set(0, 15, 0);
   scene.add(camera);
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({antialias: true});
   element = renderer.domElement;
   container = document.getElementById('webglviewer');
 
@@ -226,7 +226,7 @@ function resize() {
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  
+
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(width, height);
   effect.setSize(width, height);
