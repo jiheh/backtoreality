@@ -50,15 +50,15 @@ function init() {
   var options = {
     video: {
       mandatory: {
-        minWidth: 1600,
-        minHeight: 900,
-        minFrameRate: 60
+        minWidth: 1280,
+        minHeight: 720,
+        minFrameRate: 30
       },
       optional: [
-        // { minFrameRate: 120 },
-        // {minWidth: 1920},
-        // {minHeight: 1080},
-        {facingMode: "environment"}
+        { minFrameRate: 60 },
+        { minWidth: 1920 },
+        { minHeight: 1080 },
+        { facingMode: 'environment' }
       ]
     }
   };
@@ -73,8 +73,8 @@ function init() {
       for (var i = 0; i !== sources.length; ++i) {
         var source = sources[i];
         if (source.kind === 'video') {
-          if (source.facing && source.facing === "environment") {
-            options.video.optional.push({'sourceId': source.id});
+          if (source.facing && source.facing === 'environment') {
+            options.video.optional.push({sourceId: source.id});
           }
         }
       }
