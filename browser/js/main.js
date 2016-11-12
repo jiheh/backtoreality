@@ -56,8 +56,8 @@ function init() {
       },
       optional: [
         { minFrameRate: 120 },
-        // {minWidth: 1920},
-        // {minHeight: 1080},
+        {minWidth: 1920},
+        {minHeight: 1080},
         {facingMode: "environment"}
       ]
     }
