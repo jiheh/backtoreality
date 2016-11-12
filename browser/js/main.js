@@ -1,6 +1,7 @@
 
 var scene,
     camera,
+    sphere,
     renderer,
     element,
     container,
@@ -26,8 +27,6 @@ function init() {
   container = document.getElementById('webglviewer');
 
   container.appendChild(element);
-
-
 
   effect = new THREE.StereoEffect(renderer);
 
@@ -100,7 +99,7 @@ function init() {
     //texture.minFilter = THREE.LinearMipMapLinearFilter;
     //texture.magFilter = THREE.NearestFilter;
 
-    var cameraPlane = new THREE.PlaneGeometry(1920, 1280);
+    var cameraPlane = new THREE.PlaneGeometry(1920, 700);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
