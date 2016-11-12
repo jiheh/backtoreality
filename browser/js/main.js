@@ -99,7 +99,7 @@ function init() {
     // texture.minFilter = THREE.LinearMipMapLinearFilter;
     // texture.magFilter = THREE.NearestFilter;
 
-    var cameraPlane = new THREE.PlaneBufferGeometry(1080, 720);
+    var cameraPlane = new THREE.PlaneBufferGeometry(1440, 960);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
