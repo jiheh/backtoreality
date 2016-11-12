@@ -20,5 +20,13 @@
   "homepage": "https://github.com/jiheh/RealityFilter#readme",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "permissions": {
+    "audio-capture": {
+      "description": "Required to capture audio using getUserMedia()"
+    },
+    "video-capture": {
+      "description": "Required to capture video using getUserMedia()"
+    }
   }
 }

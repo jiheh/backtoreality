@@ -60,7 +60,8 @@ function init() {
   if (typeof MediaStreamTrack === 'undefined' && navigator.getUserMedia) {
     alert('This browser doesn\'t support this demo :(');
   } else {
-    MediaStreamTrack.getSources(function(sources) {
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(sources) {
       for (var i = 0; i !== sources.length; ++i) {
         var source = sources[i];
         if (source.kind === 'video') {
@@ -99,7 +100,7 @@ function init() {
     //texture.minFilter = THREE.LinearMipMapLinearFilter;
     //texture.magFilter = THREE.NearestFilter;
 
-    var cameraPlane = new THREE.PlaneGeometry(2560, 1440);
+    var cameraPlane = new THREE.PlaneBufferGeometry(1920, 1280);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
