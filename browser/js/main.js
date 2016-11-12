@@ -73,7 +73,7 @@ function init() {
       for (var i = 0; i !== sources.length; ++i) {
         var source = sources[i];
         if (source.kind === 'video') {
-          if (source.facing && source.facingMode === "environment") {
+          if (source.facing && source.facing === "environment") {
             options.video.optional.push({'sourceId': source.id});
           }
         }
