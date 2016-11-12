@@ -242,7 +242,7 @@ function resize() {
 }
 
 function update(dt) {
-  // resize();
+  resize();
 
   camera.updateProjectionMatrix();
 }
