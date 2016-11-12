@@ -73,7 +73,7 @@ function init() {
       for (var i = 0; i !== sources.length; ++i) {
         var source = sources[i];
         if (source.kind === 'video') {
-          if (source.facing && source.facingMode == "environment") {
+          if (source.facing && source.facingMode === "environment") {
             options.video.optional.push({'sourceId': source.id});
           }
         }
@@ -108,7 +108,7 @@ function init() {
     // texture.minFilter = THREE.LinearMipMapLinearFilter;
     // texture.magFilter = THREE.NearestFilter;
 
-    var cameraPlane = new THREE.PlaneBufferGeometry(1080, 720);
+    var cameraPlane = new THREE.PlaneBufferGeometry(1280, 720);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
