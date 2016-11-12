@@ -49,7 +49,17 @@ function init() {
   
   var options = {
     video: {
-      optional: [{facingMode: "environment"}]
+      mandatory: {
+        minWidth: 1280,
+        minHeight: 720,
+        minFrameRate: 30
+      },
+      optional: [
+        { minFrameRate: 60 },
+        {minWidth: 1920},
+        {minHeight: 1080},
+        {facingMode: "environment"}
+      ]
     }
   };
 
@@ -63,7 +73,7 @@ function init() {
       for (var i = 0; i !== sources.length; ++i) {
         var source = sources[i];
         if (source.kind === 'video') {
-          if (source.facing && source.facing == "environment") {
+          if (source.facing && source.facingMode == "environment") {
             options.video.optional.push({'sourceId': source.id});
           }
         }
