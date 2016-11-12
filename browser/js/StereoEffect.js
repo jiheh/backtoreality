@@ -43,6 +43,7 @@ THREE.StereoEffect = function ( renderer ) {
 		_width = width / 2;
 		_height = height;
 
+		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize( width, height );
 
 	};

@@ -9,7 +9,6 @@ var scene,
     video,
     canvas,
     context,
-    themes = ['blackandwhite', 'sepia', 'arcade', 'inverse'],
     currentTheme = 0,
     lookingAtGround = false,
     image;
@@ -122,93 +121,6 @@ function animate() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
 
-    // if (themes[currentTheme] == 'blackandwhite') {
-    //   var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    //   var data = imageData.data;
-
-    //   for (var i = 0; i < data.length; i+=4) {
-    //     var red = data[i],
-    //         green = data[i+1],
-    //         blue = data[i+2],
-    //         luminance = ((red * 299) + (green * 587) + (blue * 114)) / 1000; // Gives a value from 0 - 255
-    //     if (luminance > 175) {
-    //       red = 255;
-    //       green = 255;
-    //       blue = 255;
-    //     } else if (luminance >= 100 && luminance <= 175) {
-    //       red = 190;
-    //       green = 190;
-    //       blue = 190;
-    //     } else if (luminance < 100) {
-    //       red = 0;
-    //       green = 0;
-    //       blue = 0;
-    //     }
-
-    //     data[i] = red;
-    //     data[i+1] = green;
-    //     data[i+2] = blue;
-    //   }
-
-    //   imageData.data = data;
-
-    //   context.putImageData(imageData, 0, 0);
-    // } else if (themes[currentTheme] == 'inverse') {
-    //   var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    //   var data = imageData.data;
-
-    //   for (var i = 0; i < data.length; i+=4) {
-    //     var red = 255 - data[i],
-    //         green = 255 - data[i+1],
-    //         blue = 255 - data[i+2];
-
-    //     data[i] = red;
-    //     data[i+1] = green;
-    //     data[i+2] = blue;
-    //   }
-
-    //   imageData.data = data;
-
-    //   context.putImageData(imageData, 0, 0);
-    // } else if (themes[currentTheme] == 'sepia') {
-    //   var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    //   var data = imageData.data;
-
-    //   for (var i = 0; i < data.length; i+=4) {
-    //     var red = data[i],
-    //         green = data[i+1],
-    //         blue = data[i+2];
-            
-    //     var sepiaRed = (red * 0.393) + (green * 0.769) + (blue * 0.189);
-    //     var sepiaGreen = (red * 0.349) + (green * 0.686) + (blue * 0.168);
-    //     var sepiaBlue = (red * 0.272) + (green * 0.534) + (blue * 0.131);
-
-    //     var randomNoise = Math.random() * 50;
-
-    //     sepiaRed += randomNoise;
-    //     sepiaGreen += randomNoise;
-    //     sepiaBlue += randomNoise;
-
-    //     sepiaRed = sepiaRed > 255 ? 255 : sepiaRed;
-    //     sepiaGreen = sepiaGreen > 255 ? 255 : sepiaGreen;
-    //     sepiaBlue = sepiaBlue > 255 ? 255 : sepiaBlue;
-
-    //     data[i] = sepiaRed;
-    //     data[i+1] = sepiaGreen;
-    //     data[i+2] = sepiaBlue;
-    //   }
-
-    //   imageData.data = data;
-
-    //   context.putImageData(imageData, 0, 0);
-    // } else if (themes[currentTheme] == 'arcade') {
-    //   ClosePixelation(canvas, context, [
-    //     {
-    //       resolution: 6
-    //     }
-    //   ]);
-    // }
-
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
       texture.needsUpdate = true;
     }
@@ -226,15 +138,6 @@ function resize() {
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-
-  devicePixelRatio = window.devicePixelRatio || 1,
-  backingStoreRatio = context.webkitBackingStorePixelRatio ||
-                      context.mozBackingStorePixelRatio ||
-                      context.msBackingStorePixelRatio ||
-                      context.oBackingStorePixelRatio ||
-                      context.backingStorePixelRatio || 1,
-
-  ratio = devicePixelRatio / backingStoreRatio;
 
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(width, height);
