@@ -84,12 +84,12 @@ function init() {
     canvas = document.createElement('canvas');
     canvas.width = video.clientWidth;
     canvas.height = video.clientHeight;
-    // canvas.width = nextPowerOf2(canvas.width);
-    // canvas.height = nextPowerOf2(canvas.height);
+    canvas.width = nextPowerOf2(canvas.width);
+    canvas.height = nextPowerOf2(canvas.height);
 
-    // function nextPowerOf2(x) { 
-    //     return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2))); 
-    // }
+    function nextPowerOf2(x) { 
+        return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2))); 
+    }
 
     context = canvas.getContext('2d');
     texture = new THREE.Texture(canvas);
@@ -227,13 +227,22 @@ function resize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
+  devicePixelRatio = window.devicePixelRatio || 1,
+  backingStoreRatio = context.webkitBackingStorePixelRatio ||
+                      context.mozBackingStorePixelRatio ||
+                      context.msBackingStorePixelRatio ||
+                      context.oBackingStorePixelRatio ||
+                      context.backingStorePixelRatio || 1,
+
+  ratio = devicePixelRatio / backingStoreRatio;
+
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(width, height);
   effect.setSize(width, height);
 }
 
 function update(dt) {
-  resize();
+  // resize();
 
   camera.updateProjectionMatrix();
 }
