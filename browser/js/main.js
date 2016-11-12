@@ -50,8 +50,8 @@ function init() {
   var options = {
     video: {
       mandatory: {
-        minWidth: 1280,
-        minHeight: 720,
+        // minWidth: 1280,
+        // minHeight: 720,
         minFrameRate: 60
       },
       optional: [
