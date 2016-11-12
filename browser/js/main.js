@@ -52,12 +52,12 @@ function init() {
       mandatory: {
         minWidth: 1280,
         minHeight: 720,
-        minFrameRate: 30
+        minFrameRate: 60
       },
       optional: [
-        // { minFrameRate: 120 },
-        // {minWidth: 1920},
-        // {minHeight: 1080},
+        { minFrameRate: 120 },
+        {minWidth: 1920},
+        {minHeight: 1080},
         {facingMode: "environment"}
       ]
     }
