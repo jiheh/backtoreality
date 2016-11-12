@@ -57,7 +57,7 @@ function init() {
       optional: [
         { minFrameRate: 60 },
         {minWidth: 1920},
-        {minHeight: 1080},
+        {minHeight: 1280},
         {facingMode: "environment"}
       ]
     }
@@ -108,7 +108,7 @@ function init() {
     // texture.minFilter = THREE.LinearMipMapLinearFilter;
     // texture.magFilter = THREE.NearestFilter;
 
-    var cameraPlane = new THREE.PlaneBufferGeometry(1280, 720);
+    var cameraPlane = new THREE.PlaneBufferGeometry(1920, 1280);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
