@@ -60,8 +60,7 @@ function init() {
   if (typeof MediaStreamTrack === 'undefined' && navigator.getUserMedia) {
     alert('This browser doesn\'t support this demo :(');
   } else {
-    navigator.mediaDevices.enumerateDevices()
-    .then(function(sources) {
+    MediaStreamTrack.getSources(function(sources) {
       for (var i = 0; i !== sources.length; ++i) {
         var source = sources[i];
         if (source.kind === 'video') {
