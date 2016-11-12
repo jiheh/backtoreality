@@ -84,22 +84,22 @@ function init() {
     canvas = document.createElement('canvas');
     canvas.width = video.clientWidth;
     canvas.height = video.clientHeight;
-    canvas.width = nextPowerOf2(canvas.width);
-    canvas.height = nextPowerOf2(canvas.height);
+    // canvas.width = nextPowerOf2(canvas.width);
+    // canvas.height = nextPowerOf2(canvas.height);
 
-    function nextPowerOf2(x) { 
-        return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2))); 
-    }
+    // function nextPowerOf2(x) { 
+    //     return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2))); 
+    // }
 
     context = canvas.getContext('2d');
     texture = new THREE.Texture(canvas);
     texture.context = context;
     
     // If you do not use powersOf2, or you want to adjust things more, you could use these:
-    //texture.minFilter = THREE.LinearMipMapLinearFilter;
-    //texture.magFilter = THREE.NearestFilter;
+    // texture.minFilter = THREE.LinearMipMapLinearFilter;
+    // texture.magFilter = THREE.NearestFilter;
 
-    var cameraPlane = new THREE.PlaneBufferGeometry(1920, 1280);
+    var cameraPlane = new THREE.PlaneBufferGeometry(1080, 720);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
