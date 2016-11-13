@@ -35,6 +35,8 @@ function init() {
 
   container.appendChild(element);
 
+  //
+
   effect = new THREE.StereoEffect(renderer);
 
   element.addEventListener('click', fullscreen, false);
