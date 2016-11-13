@@ -119,6 +119,18 @@ function init() {
 
   ////
 
+  controls = new THREE.OrbitControls(camera, element);
+  controls.rotateUp(Math.PI / 4);
+  controls.target.set(
+  camera.position.x + 0.1,
+  camera.position.y,
+  camera.position.z
+  );
+  controls.noZoom = true;
+  controls.noPan = true;
+
+  ////
+
   var faceIndices = [ 'a', 'b', 'c' ];
 
   var color, f, f2, f3, p, vertexIndex,
@@ -247,7 +259,7 @@ function animate() {
 
 function update(dt) {
   resize();
-  if (controls) controls.update(dt);
+  controls.update(dt);
   stats.update();
 
   camera.updateProjectionMatrix();
