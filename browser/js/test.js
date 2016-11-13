@@ -22,7 +22,7 @@ function init() {
   camera.position.set(0, 15, 1800);
   scene.add(camera)
 
-  controls = new THREE.DeviceOrientationControls( camera );
+  // controls = new THREE.DeviceOrientationControls( camera );
 
 
 
@@ -93,16 +93,6 @@ function init() {
     texture.context = context;
 
     var cameraPlane = new THREE.PlaneBufferGeometry(3377, 1900);
-
-
-
-
-            var geometry = new THREE.BoxGeometry( 100, 100, 100, 4, 4, 4 );
-            var material = new THREE.MeshBasicMaterial( { color: 0xff00ff, side: THREE.BackSide, wireframe: true } );
-            
-            var mesh = new THREE.Mesh( geometry, material );
-            scene.add( mesh );
-
 
 
 
@@ -197,10 +187,7 @@ function init() {
   scene.add( group3 );
 
 
-  // stats = new Stats();
-  // container.appendChild(stats.dom);
-
-  // window.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
   ////
 
@@ -216,43 +203,28 @@ function init() {
   element.addEventListener('click', fullscreen, false);
 
   effect = new THREE.StereoEffect(renderer);
-  // effect.autoClear = false;
+
   ////
 
-  window.addEventListener( 'resize', resize, false );
+  // window.addEventListener( 'resize', resize, false );
   animate();
 }
 
-function resize() {
+function onDocumentMouseMove( event ) {
 
-  var width = container.offsetWidth;
-  var height = container.offsetHeight;
-  windowHalfX = window.innerWidth / 2;
-  windowHalfY = window.innerHeight / 2;
+  mouseX = (event.clientX - windowHalfX);
+  mouseY = (event.clientY - windowHalfY);
 
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
+  // window.removeEventListener('deviceorientation', setOrientationControls, true);
 
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize(width, height);
-  effect.setSize(width, height);
 }
 
-// function onDocumentMouseMove( event ) {
-
-//   mouseX = (event.clientX - windowHalfX);
-//   mouseY = (event.clientY - windowHalfY);
-
-//   window.removeEventListener('deviceorientation', setOrientationControls, true);
-
+// function setOrientationControls(e) {
+//   if (!e.alpha) { return; }
+//   controls = new THREE.DeviceOrientationControls(camera, true);
+//   controls.connect();
+//   controls.update();
 // }
-
-function setOrientationControls(e) {
-  if (!e.alpha) { return; }
-  controls = new THREE.DeviceOrientationControls(camera, true);
-  controls.connect();
-  controls.update();
-}
 //
 
 function animate() {
@@ -267,31 +239,35 @@ function animate() {
   window.requestAnimationFrame( animate );
   camera.updateProjectionMatrix();
 
-  controls.update();
-  // stats.update();
-  effect.render(scene, camera);
+  resize();
+  render();
 }
 
-// function update(dt) {
-//   resize();
-//   stats.update();
+function resize() {
 
-//   camera.updateProjectionMatrix();
-// }
+  windowHalfX = window.innerWidth / 2;
+  windowHalfY = window.innerHeight / 2;
 
-// function render(dt) {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  // camera.updateProjectionMatrix();
 
-//   camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-//   camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  effect.setSize(window.innerWidth, window.innerHeight);
+}
 
-//   camera.lookAt(scene.position);
+function render(dt) {
 
-//   // renderer.clear();
-//   // effect.render(ARscene, camera);
-//   // renderer.clearDepth();
-//   effect.render(scene, camera);
+  camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+  camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
-// }
+  camera.lookAt(scene.position);
+
+  // renderer.clear();
+  // effect.render(ARscene, camera);
+  // renderer.clearDepth();
+  effect.render(scene, camera);
+
+}
 
 function fullscreen() {
   if (container.requestFullscreen) {
