@@ -1,7 +1,9 @@
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
-      var container, stats, effect;
+      var container, stats;
+
       var camera, scene, renderer;
+
       var mesh, group1, group2, group3, light;
 
       var mouseX = 0, mouseY = 0;
@@ -10,26 +12,16 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
       var windowHalfY = window.innerHeight / 2;
 
       init();
+      animate();
 
       function init() {
 
         container = document.getElementById( 'webglviewer' );
 
+        camera = new THREE.PerspectiveCamera( 20, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 1800;
+
         scene = new THREE.Scene();
-
-        camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.set(0, 15, 1800);
-        scene.add(camera);
-
-        renderer = new THREE.WebGLRenderer( { antialias: true } );
-        renderer.setClearColor( 0xffffff );
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        container.appendChild( renderer.domElement );
-
-        effect = new THREE.StereoEffect(renderer);
-
-        ////
 
         light = new THREE.DirectionalLight( 0xffffff );
         light.position.set( 0, 0, 1 );
@@ -136,7 +128,11 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
         group3.rotation.x = 0;
         scene.add( group3 );
 
-  
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setClearColor( 0xffffff );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        container.appendChild( renderer.domElement );
 
         stats = new Stats();
         container.appendChild( stats.dom );
@@ -146,7 +142,7 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
         //
 
         window.addEventListener( 'resize', onWindowResize, false );
-        animate();
+
       }
 
       function onWindowResize() {
@@ -158,7 +154,7 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
         camera.updateProjectionMatrix();
 
         renderer.setSize( window.innerWidth, window.innerHeight );
-        effect.setSize(window.innerWidth, window.innerHeight);
+
       }
 
       function onDocumentMouseMove( event ) {
@@ -176,23 +172,16 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
         render();
         stats.update();
-        // update();
 
       }
 
-      // function update(dt) {
-      //   resize();
-
-      //   camera.updateProjectionMatrix();
-      // }
-
-      function render(dt) {
+      function render() {
 
         camera.position.x += ( mouseX - camera.position.x ) * 0.05;
         camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
         camera.lookAt( scene.position );
 
-        effect.render( scene, camera );
+        renderer.render( scene, camera );
 
       }
