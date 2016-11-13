@@ -21,10 +21,10 @@ function init() {
   camera.position.set(0, 15, 1800);
   scene.add(camera);
 
-  renderer = new THREE.WebGLRenderer( { antialias: true } );
-  renderer.setClearColor( 0xffffff );
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer.setClearColor(0xffffff);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
   element = renderer.domElement;
   container.appendChild(element);
@@ -94,12 +94,12 @@ function init() {
     texture = new THREE.Texture(canvas);
     texture.context = context;
 
-    var cameraPlane = new THREE.PlaneBufferGeometry(1280, 720);
+    var cameraPlane = new THREE.PlaneBufferGeometry(3377, 1900);
 
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
     }));
-    cameraMesh.position.z = -600;
+    cameraMesh.position.z = 0;
 
     scene.add(cameraMesh);
   }
@@ -189,7 +189,6 @@ function init() {
       f3.vertexColors[ j ] = color;
 
     }
-
   }
 
 
@@ -202,23 +201,25 @@ function init() {
 
   group1 = THREE.SceneUtils.createMultiMaterialObject( geometry, materials );
   group1.position.x = -400;
+  group1.position.z = 300;
   group1.rotation.x = -1.87;
   scene.add( group1 );
 
   group2 = THREE.SceneUtils.createMultiMaterialObject( geometry2, materials );
   group2.position.x = 400;
+  group2.position.z = 300;
   group2.rotation.x = 0;
   scene.add( group2 );
 
   group3 = THREE.SceneUtils.createMultiMaterialObject( geometry3, materials );
   group3.position.x = 0;
+  group3.position.z = 300;
   group3.rotation.x = 0;
   scene.add( group3 );
 
 
-
   stats = new Stats();
-  container.appendChild( stats.dom );
+  container.appendChild(stats.dom);
 
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
@@ -230,20 +231,23 @@ function init() {
 
 function onWindowResize() {
 
+  var width = container.offsetWidth;
+  var height = container.offsetHeight;
   windowHalfX = window.innerWidth / 2;
   windowHalfY = window.innerHeight / 2;
 
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  effect.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize(width, height);
+  effect.setSize(width, height);
 }
 
 function onDocumentMouseMove( event ) {
 
-  mouseX = ( event.clientX - windowHalfX );
-  mouseY = ( event.clientY - windowHalfY );
+  mouseX = (event.clientX - windowHalfX);
+  mouseY = (event.clientY - windowHalfY);
 
 }
 
@@ -259,16 +263,9 @@ function animate() {
   }
 
   requestAnimationFrame( animate );
-
+  camera.updateProjectionMatrix();
   render();
   stats.update();
-  update();
-
-}
-
-function update(dt) {
-
-  camera.updateProjectionMatrix();
 }
 
 function render(dt) {
@@ -276,9 +273,9 @@ function render(dt) {
   camera.position.x += ( mouseX - camera.position.x ) * 0.05;
   camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
-  camera.lookAt( scene.position );
+  camera.lookAt(scene.position);
 
-  effect.render( scene, camera );
+  effect.render(scene, camera);
 
 }
 
