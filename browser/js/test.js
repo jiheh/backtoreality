@@ -1,7 +1,7 @@
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container, stats;
-var camera, scene, renderer, effect, element, context;
+var camera, scene, scene, renderer, effect, element, context;
 var mesh, group1, group2, group3, light;
 
 var mouseX = 0, mouseY = 0;
@@ -16,6 +16,7 @@ function init() {
   container = document.getElementById( 'webglviewer' );
 
   scene = new THREE.Scene();
+  ARscene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.set(0, 15, 1800);
@@ -25,12 +26,14 @@ function init() {
   renderer.setClearColor(0xffffff);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.autoClear = false;
 
   element = renderer.domElement;
   container.appendChild(element);
   element.addEventListener('click', fullscreen, false);
 
   effect = new THREE.StereoEffect(renderer);
+  effect.autoClear = false;
 
 
   // VIDEO ELEMENT
@@ -114,42 +117,7 @@ function init() {
   light.position.set( 0, 0, 1 );
   scene.add( light );
 
-  // shadow
-
-  // var canvas = document.createElement( 'canvas' );
-  // canvas.width = 128;
-  // canvas.height = 128;
-
-  // var context = canvas.getContext( '2d' );
-  // var gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
-  // gradient.addColorStop( 0.1, 'rgba(210,210,210,1)' );
-  // gradient.addColorStop( 1, 'rgba(255,255,255,1)' );
-
-  // context.fillStyle = gradient;
-  // context.fillRect( 0, 0, canvas.width, canvas.height );
-
-  // var shadowTexture = new THREE.Texture( canvas );
-  // shadowTexture.needsUpdate = true;
-
-  // var shadowMaterial = new THREE.MeshBasicMaterial( { map: shadowTexture } );
-  // var shadowGeo = new THREE.PlaneBufferGeometry( 300, 300, 1, 1 );
-
-  // mesh = new THREE.Mesh( shadowGeo, shadowMaterial );
-  // mesh.position.y = - 250;
-  // mesh.rotation.x = - Math.PI / 2;
-  // scene.add( mesh );
-
-  // mesh = new THREE.Mesh( shadowGeo, shadowMaterial );
-  // mesh.position.y = - 250;
-  // mesh.position.x = - 400;
-  // mesh.rotation.x = - Math.PI / 2;
-  // scene.add( mesh );
-
-  // mesh = new THREE.Mesh( shadowGeo, shadowMaterial );
-  // mesh.position.y = - 250;
-  // mesh.position.x = 400;
-  // mesh.rotation.x = - Math.PI / 2;
-  // scene.add( mesh );
+  ////
 
   var faceIndices = [ 'a', 'b', 'c' ];
 
@@ -221,9 +189,10 @@ function init() {
   stats = new Stats();
   container.appendChild(stats.dom);
 
-  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  window.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  window.addEventListener( 'deviceorientation', setOrientationControls, true);
 
-  //
+  ////
 
   window.addEventListener( 'resize', onWindowResize, false );
   animate();
@@ -249,8 +218,16 @@ function onDocumentMouseMove( event ) {
   mouseX = (event.clientX - windowHalfX);
   mouseY = (event.clientY - windowHalfY);
 
+  window.removeEventListener('deviceorientation', setOrientationControls, true);
+
 }
 
+function setOrientationControls(e) {
+  if (!e.alpha) { return; }
+  controls = new THREE.DeviceOrientationControls(camera, true);
+  controls.connect();
+  controls.update();
+}
 //
 
 function animate() {
@@ -275,6 +252,11 @@ function render(dt) {
 
   camera.lookAt(scene.position);
 
+
+
+  // renderer.clear();
+  // effect.render(ARscene, camera);
+  // renderer.clearDepth();
   effect.render(scene, camera);
 
 }
