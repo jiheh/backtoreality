@@ -25,24 +25,10 @@ function init() {
   controls = new THREE.DeviceOrientationControls( camera );
 
 
-  renderer = new THREE.WebGLRenderer({antialias: true});
-  renderer.setClearColor(0xffffff);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.autoClear = false;
-
-  element = renderer.domElement;
-  container.appendChild(element);
-  element.addEventListener('click', fullscreen, false);
-
-
 
   // if (window.DeviceOrientationEvent) {
   //   window.addEventListener('deviceorientation', setOrientationControls.bind(this));
   // }
-
-  effect = new THREE.StereoEffect(renderer);
-  effect.autoClear = false;
 
 
   // VIDEO ELEMENT
@@ -205,6 +191,21 @@ function init() {
 
   ////
 
+
+  renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer.setClearColor(0xffffff);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  // renderer.autoClear = false;
+
+  element = renderer.domElement;
+  container.appendChild(element);
+  element.addEventListener('click', fullscreen, false);
+  
+  effect = new THREE.StereoEffect(renderer);
+  // effect.autoClear = false;
+  ////
+
   window.addEventListener( 'resize', resize, false );
   animate();
 }
@@ -249,7 +250,6 @@ function animate() {
       texture.needsUpdate = true;
     }
   }
-
 
   window.requestAnimationFrame( animate );
   camera.updateProjectionMatrix();
