@@ -16,14 +16,22 @@ var scene,
 init();
 
 function init() {
+
+  container = document.getElementById('webglviewer');
+
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.001, 700);
+
+  // Camera created and added to scene
+  camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.set(0, 15, 0);
   scene.add(camera);
 
+
   renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize( window.innerWidth, window.innerHeight );
   element = renderer.domElement;
-  container = document.getElementById('webglviewer');
+
 
   container.appendChild(element);
 
@@ -43,6 +51,15 @@ function init() {
   //     }
   //   }.bind(this));
   // }
+
+  // WEB ELEMENT
+
+  // var material = new THREE.MeshBasicMaterial({wireframe: true});
+  // var geometry = new THREE.PlaneGeometry();
+  // var planeMesh = new THREE.Mesh(geometry, material);
+  // scene.add(planeMesh);
+
+  // VIDEO ELEMENT
 
   video = document.createElement('video');
   video.setAttribute('autoplay', true);
@@ -81,6 +98,8 @@ function init() {
       
       navigator.getUserMedia(options, streamFound, streamError);
     });
+
+
   }
 
   function streamFound(stream) {
@@ -104,9 +123,9 @@ function init() {
     texture = new THREE.Texture(canvas);
     texture.context = context;
     
-    // If you do not use powersOf2, or you want to adjust things more, you could use these:
-    // texture.minFilter = THREE.LinearMipMapLinearFilter;
-    // texture.magFilter = THREE.NearestFilter;
+  //   // If you do not use powersOf2, or you want to adjust things more, you could use these:
+  //   // texture.minFilter = THREE.LinearMipMapLinearFilter;
+  //   // texture.magFilter = THREE.NearestFilter;
 
     var cameraPlane = new THREE.PlaneBufferGeometry(1280, 720);
 
@@ -129,7 +148,6 @@ function init() {
 function animate() {
   if (context) {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
 
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
       texture.needsUpdate = true;

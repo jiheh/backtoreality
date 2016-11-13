@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/jiheh/RealityFilter#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "three": "^0.82.1"
   },
   "permissions": {
     "audio-capture": {
