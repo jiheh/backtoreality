@@ -20,7 +20,10 @@ function init() {
 
   camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.set(0, 15, 1800);
-  scene.add(camera);
+  scene.add(camera)
+
+  controls = new THREE.DeviceOrientationControls( camera );
+
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setClearColor(0xffffff);
@@ -33,7 +36,6 @@ function init() {
   element.addEventListener('click', fullscreen, false);
 
 
-  controls = new THREE.DeviceOrientationControls( camera );
 
   // if (window.DeviceOrientationEvent) {
   //   window.addEventListener('deviceorientation', setOrientationControls.bind(this));
@@ -196,8 +198,8 @@ function init() {
   scene.add( group3 );
 
 
-  stats = new Stats();
-  container.appendChild(stats.dom);
+  // stats = new Stats();
+  // container.appendChild(stats.dom);
 
   // window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
@@ -249,12 +251,12 @@ function animate() {
   }
 
 
-  requestAnimationFrame( animate );
+  window.requestAnimationFrame( animate );
   camera.updateProjectionMatrix();
 
   controls.update();
-  stats.update();
-  render();
+  // stats.update();
+  effect.render(scene, camera);
 }
 
 // function update(dt) {
@@ -264,19 +266,19 @@ function animate() {
 //   camera.updateProjectionMatrix();
 // }
 
-function render(dt) {
+// function render(dt) {
 
-  camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-  camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+//   camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+//   camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
-  camera.lookAt(scene.position);
+//   camera.lookAt(scene.position);
 
-  // renderer.clear();
-  // effect.render(ARscene, camera);
-  // renderer.clearDepth();
-  effect.render(scene, camera);
+//   // renderer.clear();
+//   // effect.render(ARscene, camera);
+//   // renderer.clearDepth();
+//   effect.render(scene, camera);
 
-}
+// }
 
 function fullscreen() {
   if (container.requestFullscreen) {
