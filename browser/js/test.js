@@ -32,6 +32,10 @@ function init() {
   container.appendChild(element);
   element.addEventListener('click', fullscreen, false);
 
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', setOrientationControls.bind(this));
+  }
+
   effect = new THREE.StereoEffect(renderer);
   effect.autoClear = false;
 
@@ -119,15 +123,6 @@ function init() {
 
   ////
 
-  controls = new THREE.OrbitControls(camera, element);
-  controls.rotateUp(Math.PI / 4);
-  controls.target.set(
-  camera.position.x + 0.1,
-  camera.position.y,
-  camera.position.z
-  );
-  controls.noZoom = true;
-  controls.noPan = true;
 
   ////
 
@@ -202,7 +197,6 @@ function init() {
   container.appendChild(stats.dom);
 
   window.addEventListener( 'mousemove', onDocumentMouseMove, false );
-  window.addEventListener( 'deviceorientation', setOrientationControls, true);
 
   ////
 
@@ -259,7 +253,6 @@ function animate() {
 
 function update(dt) {
   resize();
-  controls.update(dt);
   stats.update();
 
   camera.updateProjectionMatrix();
