@@ -1,7 +1,7 @@
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container, stats;
-var camera, scene, scene, renderer, effect, element, context;
+var camera, scene, scene, renderer, effect, element, context, controls;
 var mesh, group1, group2, group3, light;
 
 var mouseX = 0, mouseY = 0;
@@ -194,11 +194,11 @@ function init() {
 
   ////
 
-  window.addEventListener( 'resize', onWindowResize, false );
+  window.addEventListener( 'resize', resize, false );
   animate();
 }
 
-function onWindowResize() {
+function resize() {
 
   var width = container.offsetWidth;
   var height = container.offsetHeight;
@@ -240,9 +240,17 @@ function animate() {
   }
 
   requestAnimationFrame( animate );
-  camera.updateProjectionMatrix();
+
+  update();
   render();
+}
+
+function update(dt) {
+  resize();
+  if (controls) controls.update(dt);
   stats.update();
+
+  camera.updateProjectionMatrix();
 }
 
 function render(dt) {
@@ -251,8 +259,6 @@ function render(dt) {
   camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
   camera.lookAt(scene.position);
-
-
 
   // renderer.clear();
   // effect.render(ARscene, camera);
