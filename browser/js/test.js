@@ -32,9 +32,12 @@ function init() {
   container.appendChild(element);
   element.addEventListener('click', fullscreen, false);
 
-  if (window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', setOrientationControls.bind(this));
-  }
+
+  controls = new THREE.DeviceOrientationControls( camera );
+
+  // if (window.DeviceOrientationEvent) {
+  //   window.addEventListener('deviceorientation', setOrientationControls.bind(this));
+  // }
 
   effect = new THREE.StereoEffect(renderer);
   effect.autoClear = false;
@@ -196,7 +199,7 @@ function init() {
   stats = new Stats();
   container.appendChild(stats.dom);
 
-  window.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  // window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
   ////
 
@@ -245,18 +248,21 @@ function animate() {
     }
   }
 
-  requestAnimationFrame( animate );
 
-  update();
+  requestAnimationFrame( animate );
+  camera.updateProjectionMatrix();
+
+  controls.update();
+  stats.update();
   render();
 }
 
-function update(dt) {
-  resize();
-  stats.update();
+// function update(dt) {
+//   resize();
+//   stats.update();
 
-  camera.updateProjectionMatrix();
-}
+//   camera.updateProjectionMatrix();
+// }
 
 function render(dt) {
 
