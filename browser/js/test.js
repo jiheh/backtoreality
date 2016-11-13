@@ -94,6 +94,18 @@ function init() {
 
     var cameraPlane = new THREE.PlaneBufferGeometry(3377, 1900);
 
+
+
+
+            var geometry = new THREE.BoxGeometry( 100, 100, 100, 4, 4, 4 );
+            var material = new THREE.MeshBasicMaterial( { color: 0xff00ff, side: THREE.BackSide, wireframe: true } );
+            
+            var mesh = new THREE.Mesh( geometry, material );
+            scene.add( mesh );
+
+
+
+
     cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
       color: 0xffffff, opacity: 1, map: texture
     }));
@@ -126,6 +138,7 @@ function init() {
     geometry  = new THREE.IcosahedronGeometry( radius, 1 ),
     geometry2 = new THREE.IcosahedronGeometry( radius, 1 ),
     geometry3 = new THREE.IcosahedronGeometry( radius, 1 );
+
 
   for ( var i = 0; i < geometry.faces.length; i ++ ) {
 
@@ -201,7 +214,7 @@ function init() {
   element = renderer.domElement;
   container.appendChild(element);
   element.addEventListener('click', fullscreen, false);
-  
+
   effect = new THREE.StereoEffect(renderer);
   // effect.autoClear = false;
   ////
@@ -225,14 +238,14 @@ function resize() {
   effect.setSize(width, height);
 }
 
-function onDocumentMouseMove( event ) {
+// function onDocumentMouseMove( event ) {
 
-  mouseX = (event.clientX - windowHalfX);
-  mouseY = (event.clientY - windowHalfY);
+//   mouseX = (event.clientX - windowHalfX);
+//   mouseY = (event.clientY - windowHalfY);
 
-  window.removeEventListener('deviceorientation', setOrientationControls, true);
+//   window.removeEventListener('deviceorientation', setOrientationControls, true);
 
-}
+// }
 
 function setOrientationControls(e) {
   if (!e.alpha) { return; }
