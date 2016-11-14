@@ -1,13 +1,15 @@
 if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
-var container, stats;
-var camera, scene, scene, renderer, effect, element, context, controls;
+var container;
+var camera, scene, cssScene, renderer, effect, element, context, mixerContext, controls, cssRenderer;
 var mesh, group1, group2, group3, light;
 
 var mouseX = 0, mouseY = 0;
 
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
+
+var updateFcts  = [];
 
 init();
 
@@ -16,11 +18,33 @@ function init() {
   container = document.getElementById( 'webglviewer' );
 
   scene = new THREE.Scene();
-  ARscene = new THREE.Scene();
+  cssScene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.set(0, 15, 1800);
   scene.add(camera)
+  cssScene.add(camera)
+
+
+
+  renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+  renderer.autoClear = false;
+  renderer.setClearColor(0xffffff);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  cssRenderer = new THREE.CSS3DStereoRenderer();
+  cssRenderer.setSize( window.innerWidth, window.innerHeight );
+  cssRenderer.domElement.style.position = 'absolute';
+  cssRenderer.domElement.style.top = 0;
+
+  element = cssRenderer.domElement;
+  container.appendChild(element);
+  container.appendChild(renderer.domElement)
+  element.addEventListener('click', fullscreen, false);
+
+  effect = new THREE.StereoEffect(renderer);
+  // cssEffect = new THREE.StereoEffect(cssRenderer);
 
   // controls = new THREE.DeviceOrientationControls( camera );
 
@@ -117,6 +141,68 @@ function init() {
   ////
 
 
+
+// create the plane mesh
+var material = new THREE.MeshBasicMaterial({ wireframe: true });
+var geometry = new THREE.PlaneGeometry();
+var planeMesh= new THREE.Mesh( geometry, material );
+// add it to the WebGL scene
+scene.add(planeMesh);
+
+// create the dom Element
+  var url   = 'http://threejs.org/';
+  var domElement  = document.createElement('iframe')
+  domElement.src  = url
+  domElement.style.border = 'none'
+// create the object3d for this element
+var cssObject = new THREE.CSS3DObject( domElement );
+// we reference the same position and rotation 
+cssObject.position = planeMesh.position;
+cssObject.rotation = planeMesh.rotation;
+// add it to the css scene
+cssScene.add(cssObject);
+
+
+
+
+
+
+
+  // mixerContext = new THREEx.HtmlMixer.Context(renderer, scene, camera)
+
+  // rendererCss = mixerContext.rendererCss
+  // rendererCss.setSize( window.innerWidth, window.innerHeight )
+  // // set up rendererWebgl
+  // var rendererWebgl = mixerContext.rendererWebgl
+
+  // var css3dElement = rendererCss.domElement
+  // css3dElement.style.position = 'absolute'
+  // css3dElement.style.top    = '0px'
+  // css3dElement.style.width  = '100%'
+  // css3dElement.style.height = '100%'
+  // document.body.appendChild( css3dElement )
+  
+  // var webglCanvas     = rendererWebgl.domElement
+  // webglCanvas.style.position  = 'absolute'
+  // webglCanvas.style.top   = '0px'
+  // webglCanvas.style.width   = '100%'
+  // webglCanvas.style.height  = '100%'
+  // webglCanvas.style.pointerEvents = 'none'
+  // css3dElement.appendChild( webglCanvas )
+
+
+  //   // create the iframe element
+  // var url   = 'http://threejs.org/';
+  // var domElement  = document.createElement('iframe')
+  // domElement.src  = url
+  // domElement.style.border = 'none'
+
+  // // create the plane
+  // var mixerPlane  = new THREEx.HtmlMixer.Plane(mixerContext, domElement)
+  // mixerPlane.object3d.scale.multiplyScalar(2)
+  // scene.add(mixerPlane.object3d)
+
+
   ////
 
   var faceIndices = [ 'a', 'b', 'c' ];
@@ -192,18 +278,6 @@ function init() {
   ////
 
 
-  renderer = new THREE.WebGLRenderer({antialias: true});
-  renderer.setClearColor(0xffffff);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  // renderer.autoClear = false;
-
-  element = renderer.domElement;
-  container.appendChild(element);
-  element.addEventListener('click', fullscreen, false);
-
-  effect = new THREE.StereoEffect(renderer);
-
   ////
 
   // window.addEventListener( 'resize', resize, false );
@@ -251,8 +325,12 @@ function resize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   // camera.updateProjectionMatrix();
 
+  // mixerContext.rendererCss.setSize(window.innerWidth, window.innerHeight);
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   effect.setSize(window.innerWidth, window.innerHeight);
+
+
 }
 
 function render(dt) {
@@ -262,10 +340,21 @@ function render(dt) {
 
   camera.lookAt(scene.position);
 
+
+  updateFcts.push(function(delta, now){
+    // NOTE: it must be after camera mode
+    mixerContext.update(delta, now)
+  })
+  // render the webgl
+  updateFcts.push(function(){
+    effect.render( scene, camera );   
+  })
+
   // renderer.clear();
   // effect.render(ARscene, camera);
   // renderer.clearDepth();
   effect.render(scene, camera);
+  cssRenderer.render(cssScene, camera);
 
 }
 
