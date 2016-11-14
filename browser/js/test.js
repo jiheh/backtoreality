@@ -150,7 +150,7 @@ var planeMesh= new THREE.Mesh( geometry, material );
 scene.add(planeMesh);
 
 // create the dom Element
-  var url = 'https://www.youtube.com/embed/mKRbJUs1ci8';
+  var url = 'https://www.youtube.com/embed/7Uyiew5VsiE';
   var domElement  = document.createElement('iframe');
   domElement.src  = url;
   domElement.style.border = 'none';
@@ -325,8 +325,7 @@ function resize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   // camera.updateProjectionMatrix();
 
-  // mixerContext.rendererCss.setSize(window.innerWidth, window.innerHeight);
-
+  cssRenderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setSize(window.innerWidth, window.innerHeight);
   effect.setSize(window.innerWidth, window.innerHeight);
 
@@ -350,9 +349,6 @@ function render(dt) {
     effect.render( scene, camera );   
   })
 
-  // renderer.clear();
-  // effect.render(ARscene, camera);
-  // renderer.clearDepth();
   effect.render(scene, camera);
   cssRenderer.render(cssScene, camera);
 
