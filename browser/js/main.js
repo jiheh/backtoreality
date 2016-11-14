@@ -4,16 +4,11 @@ if (! Detector.webgl) Detector.addGetWebGLMessage();
 var container;
 var camera, scene, cssScene, renderer, cssRenderer, effect, element, context;
 var group1, group2, group3, light;
-var spheres = [];
 
 // For mouse controls
 var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
-
-  var mesh, lightMesh
-
-      var directionalLight, pointLight;
 
 init();
 
@@ -151,7 +146,7 @@ function init() {
   cssObject.position = planeMesh.position;
   cssObject.rotation = planeMesh.rotation;
   // added to the CSS scene
-  // cssScene.add(cssObject);
+  cssScene.add(cssObject);
 
 
   // 3D Objects
@@ -204,41 +199,19 @@ light = new THREE.DirectionalLight(0xffffff);
   group1.position.z = 300;
   group1.rotation.x = -1.87;
   // The three balls added to the WebGL scene
-  // scene.add(group1);
+  scene.add(group1);
 
   group2 = THREE.SceneUtils.createMultiMaterialObject(geometry2, materials);
   group2.position.x = 400;
   group2.position.z = 300;
   group2.rotation.x = 0;
-  // scene.add(group2);
+  scene.add(group2);
 
   group3 = THREE.SceneUtils.createMultiMaterialObject(geometry3, materials);
   group3.position.x = 0;
   group3.position.z = 300;
   group3.rotation.x = 0;
-  // scene.add(group3);
-
-
-  
-    var geometry = new THREE.SphereBufferGeometry( 25, 32, 16 );
-
-    var textureCube = new THREE.CubeTextureLoader()
-      .setPath( 'public/images/' )
-      .load( [ 'px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg' ] );
-    textureCube.mapping = THREE.CubeRefractionMapping;
-    var material = new THREE.MeshBasicMaterial( { color: 0x000000, envMap: textureCube, refractionRatio: 0.95 } );
-    for ( var i = 0; i < 500; i ++ ) {
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.x = Math.random() * 1000 - 500;
-      mesh.position.y = Math.random() * 1000 - 500;
-      mesh.position.z = Math.random() * 1000 - 500;
-      mesh.scale.x = mesh.scale.y = mesh.scale.z = Math.random() * 3 + 1;
-      scene.add( mesh );
-      spheres.push( mesh );
-        }
-
-
-
+  scene.add(group3);
 
   // Event listener for mouse controls
   window.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -282,21 +255,10 @@ function resize() {
 
 function render(dt) {
 
+  camera.lookAt( scene.position );
 
-          var timer = 0.0001 * Date.now();
-        camera.position.x += ( mouseX - camera.position.x ) * .05;
-        camera.position.y += ( - mouseY - camera.position.y ) * .05;
-        camera.lookAt( scene.position );
-
-        for ( var i = 0, il = spheres.length; i < il; i ++ ) {
-          var sphere = spheres[ i ];
-          sphere.position.x = 5000 * Math.cos( timer + i );
-          sphere.position.y = 5000 * Math.sin( timer + i * 1.1 );
-
-  // camera.position.x += (mouseX - camera.position.x) * 0.05;
-  // camera.position.y += (- mouseY - camera.position.y) * 0.05;
-
-}
+  camera.position.x += (mouseX - camera.position.x) * 0.05;
+  camera.position.y += (- mouseY - camera.position.y) * 0.05;
 
   effect.render(scene, camera);
   cssRenderer.render(cssScene, camera);
