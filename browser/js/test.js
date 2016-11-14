@@ -142,25 +142,25 @@ function init() {
 
 
 
-// // create the plane mesh
-// var material = new THREE.MeshBasicMaterial({ wireframe: true });
-// var geometry = new THREE.PlaneGeometry();
-// var planeMesh= new THREE.Mesh( geometry, material );
-// // add it to the WebGL scene
-// scene.add(planeMesh);
+// create the plane mesh
+var material = new THREE.MeshBasicMaterial({ wireframe: true });
+var geometry = new THREE.PlaneGeometry();
+var planeMesh= new THREE.Mesh( geometry, material );
+// add it to the WebGL scene
+scene.add(planeMesh);
 
-// // create the dom Element
-//   var url = 'https://www.youtube.com/embed/7Uyiew5VsiE';
-//   var domElement  = document.createElement('iframe');
-//   domElement.src  = url;
-//   domElement.style.border = 'none';
-// // create the object3d for this element
-// var cssObject = new THREE.CSS3DObject(domElement);
-// // we reference the same position and rotation 
-// cssObject.position = planeMesh.position;
-// cssObject.rotation = planeMesh.rotation;
-// // add it to the css scene
-// cssScene.add(cssObject);
+// create the dom Element
+  var url = 'https://www.youtube.com/embed/7Uyiew5VsiE';
+  var domElement  = document.createElement('iframe');
+  domElement.src  = url;
+  domElement.style.border = 'none';
+// create the object3d for this element
+var cssObject = new THREE.CSS3DObject(domElement);
+// we reference the same position and rotation 
+cssObject.position = planeMesh.position;
+cssObject.rotation = planeMesh.rotation;
+// add it to the css scene
+cssScene.add(cssObject);
 
 
 
