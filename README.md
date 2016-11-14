@@ -5,6 +5,8 @@ A boilerplate for web developers who want to work with stereoscopic augmented re
 
 Uses three.js and getUserMedia.
 
+Note: Chrome now requires a secure connection in order to access your device's camera! I recommend deploying to your app to test it out on other devices.
+
 ##Examples are Available at the Following Links:
 
 [Stereoscopic Camera View](https://backtoreality-camera.herokuapp.com/)
