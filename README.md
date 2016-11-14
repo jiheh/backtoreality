@@ -1,9 +1,9 @@
 Back to Reality
 ========
 
-A boilerplate for web developers who want to work with stereoscopic augmented reality!
+A boilerplate for web developers who want to make apps for stereoscopic augmented reality using three.js and getUserMedia.
 
-Uses three.js and getUserMedia.
+To get started, `npm install` and `npm run local`!
 
 Note: Chrome now requires a secure connection in order to access your device's camera! I recommend deploying to your app to test it out on other devices.
 
