@@ -17,8 +17,6 @@ function init() {
   container = document.getElementById('webglviewer');
 
   scene = new THREE.Scene();
-  scene.background = new THREE.CubeTextureLoader();
-
   cssScene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 1, 10000);
@@ -151,7 +149,7 @@ function init() {
 
   // 3D Objects
   
-light = new THREE.DirectionalLight(0xffffff);
+  light = new THREE.DirectionalLight(0xffffff);
   light.position.set(0, 0, 1);
   scene.add(light);
 
