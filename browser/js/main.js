@@ -144,7 +144,7 @@ function init() {
   cssObject.position = planeMesh.position;
   cssObject.rotation = planeMesh.rotation;
   // added to the CSS scene
-  cssScene.add(cssObject);
+  // cssScene.add(cssObject);
 
 
   // 3D Objects

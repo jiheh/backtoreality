@@ -2,6 +2,7 @@ Back to Reality
 ========
 
 A boilerplate for web developers who want to work with stereoscopic augmented reality!
+
 Uses three.js and getUserMedia.
 
 ##Examples are Available at the Following Links:
