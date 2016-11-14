@@ -258,19 +258,19 @@ cssScene.add(cssObject);
   group1.position.x = -400;
   group1.position.z = 300;
   group1.rotation.x = -1.87;
-  scene.add( group1 );
+  // scene.add( group1 );
 
   group2 = THREE.SceneUtils.createMultiMaterialObject( geometry2, materials );
   group2.position.x = 400;
   group2.position.z = 300;
   group2.rotation.x = 0;
-  scene.add( group2 );
+  // scene.add( group2 );
 
   group3 = THREE.SceneUtils.createMultiMaterialObject( geometry3, materials );
   group3.position.x = 0;
   group3.position.z = 300;
   group3.rotation.x = 0;
-  scene.add( group3 );
+  // scene.add( group3 );
 
 
   window.addEventListener( 'mousemove', onDocumentMouseMove, false );
