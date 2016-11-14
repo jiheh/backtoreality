@@ -160,7 +160,7 @@ var cssObject = new THREE.CSS3DObject(domElement);
 cssObject.position = planeMesh.position;
 cssObject.rotation = planeMesh.rotation;
 // add it to the css scene
-// cssScene.add(cssObject);
+cssScene.add(cssObject);
 
 
 
