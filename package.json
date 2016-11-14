@@ -1,7 +1,7 @@
 {
-  "name": "mixedreality",
+  "name": "backToReality",
   "version": "1.0.0",
-  "description": "A mixed reality app",
+  "description": "A boilerplate for web developers to start developing in stereoscopic augmented reality",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -10,24 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jiheh/RealityFilter.git"
+    "url": "git+https://github.com/jiheh/backtoreality.git"
   },
   "author": "Jiheh Ritterling",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jiheh/RealityFilter/issues"
+    "url": "https://github.com/jiheh/backtoreality/issues"
   },
-  "homepage": "https://github.com/jiheh/RealityFilter#readme",
+  "homepage": "https://github.com/jiheh/backtoreality#readme",
   "dependencies": {
     "express": "^4.14.0",
     "three": "^0.82.1"
-  },
-  "permissions": {
-    "audio-capture": {
-      "description": "Required to capture audio using getUserMedia()"
-    },
-    "video-capture": {
-      "description": "Required to capture video using getUserMedia()"
-    }
   }
 }

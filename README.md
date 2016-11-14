@@ -1,8 +1,19 @@
-Reality Filter
+Back to Reality
 ========
 
-A demo showing how to use HTML5, JavaScript, WebGL and Google Cardboard to create a manipulated view of the world around you via your phone's front camera.
+A boilerplate for web developers who want to begin developing in stereoscopic-view augmented reality! Uses three.js and getUserMedia.
 
-If you make something brilliant from this code, please do let me know! I'm on Twitter at @thatpatrickguy, or you can find me at http://www.patrickcatanzariti.com.
+##Examples Available at the following Links:
 
-PatCat
+Just the Camera:
+https://backtoreality-camera.herokuapp.com/
+Camera and 3d Object:
+https://backtoreality-3d.herokuapp.com/
+Camera with HTML Element (embedded Youtube Video):
+https://backtoreality-video.herokuapp.comx/
+
+##Sources of Help
+
+Patrick Catanzariti: https://www.sitepoint.com/filtering-reality-with-javascript-google-cardboard/
+
+Alexandra Etienne and Jerome Etienne: http://learningthreejs.com/blog/2013/04/30/closing-the-gap-between-html-and-webgl/

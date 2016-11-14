@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Reality Filter</title>
+    <title>Back to Reality</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-
   </head>
+
   <body>
 
     <div id="webglviewer"></div>
 
+    <!-- Main libraries, more tools and renderers are availble on three.js -->
     <script src="../build/three.js"></script>
     <script src="./js/Detector.js"></script>
-    <!-- <script src="./js/libs/stats.min.js"></script> -->
+
+    <!-- Allows camera feed and WebGL to be rendered in stereoscopic view -->
     <script src="./js/StereoEffect.js"></script>
-    <script src='./js/OrbitControls.js'></script>
-    <script src="./js/CSS3DRenderer.js"></script>
+
+    <!-- Allows HTML Elements to be rendered in stereoscopic view -->
     <script src="./js/CSS3DStereoRenderer.js"></script>
+
+    <!--In case you need HTML Elements without stereoscopic view
+    <script src="./js/CSS3DRenderer.js"></script>
+    -->
+
+    <!-- For mouse controls on the web -->
+    <script src='./js/OrbitControls.js'></script>
+
+    <!-- 
+    In case you want to implement phone movements as controls
     <script src="./js/DeviceOrientationControls.js"></script>
-    <!-- <script src="./js/main.js"></script> -->
-    <script src="./js/test.js"></script>
+     -->
+
+    <!-- Where all the magic happens -->
+    <script src="./js/main.js"></script>
 
     <link rel="stylesheet" href="./public/stylesheets/style.css"></script>
   </body>
