@@ -32,3 +32,8 @@ img{
 a {
   color: #0080ff;
 }
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
