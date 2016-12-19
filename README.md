@@ -9,11 +9,9 @@ Note: Chrome now requires a secure connection in order to access your device's c
 
 ##Examples are Available at the Following Links:
 
-[Stereoscopic Camera View](https://backtoreality-camera.herokuapp.com/)
-
 [Camera & 3D Object](https://backtoreality-3d.herokuapp.com/)
 
-[Camera & HTML Element](https://backtoreality-video.herokuapp.comx/)
+[Camera & HTML Element](https://backtoreality-video.herokuapp.com/)
 
 ###Sources of Help
 
